@@ -7,7 +7,7 @@
 ## Code
 
 Lancer le projet via :
-````
+```
 yarn && yarn vite
 ```
 
