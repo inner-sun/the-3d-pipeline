@@ -5,7 +5,7 @@ class: invert
 ---
 
 <!-- _footer: "three.js | thebookofshaders | blender" -->
-![bg](cover.png)
+![bg](01-basics.png)
 
 # Les bases de la Pipeline 3D
 
