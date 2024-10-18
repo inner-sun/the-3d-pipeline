@@ -1,6 +1,6 @@
-import { BufferAttribute, BufferGeometry, Mesh, MeshBasicMaterial, Object3D, PointsMaterial, ShaderMaterial } from 'three'
-import vertexShader from '../shaders/basic.vert?raw'
-import fragmentShader from '../shaders/basic.frag?raw'
+import { BufferAttribute, BufferGeometry, Mesh, Object3D, ShaderMaterial } from 'three'
+import vertexShader from '~/shaders/basic.vert?raw'
+import fragmentShader from '~/shaders/basic.frag?raw'
 
 export class Quad {
   mesh: Object3D

@@ -1,4 +1,4 @@
-import { BoxGeometry, Mesh, MeshBasicMaterial, MeshNormalMaterial, Object3D } from 'three'
+import { BoxGeometry, Mesh, MeshNormalMaterial, Object3D } from 'three'
 
 export class Cube{
   mesh: Object3D

@@ -1,11 +1,10 @@
-import { Scene, PerspectiveCamera, WebGLRenderer, Object3D } from 'three'
-import { Quad } from './meshes/quad'
+import { Scene, PerspectiveCamera, WebGLRenderer } from 'three'
+import { Quad } from '~/meshes/quad'
 
 export default class Logic {
   scene: Scene
   camera: PerspectiveCamera
   renderer: WebGLRenderer
-  mesh: Object3D
 
   constructor() {
     this.scene = new Scene
