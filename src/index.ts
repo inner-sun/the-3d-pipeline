@@ -1,3 +1,3 @@
-import Logic from './logic'
+import Logic from '~/logic'
 
 const logic = new Logic
