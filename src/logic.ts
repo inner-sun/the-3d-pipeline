@@ -1,6 +1,6 @@
 import { Scene, PerspectiveCamera, WebGLRenderer } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { Riverbed } from '~/meshes/riverbed'
+import { Riverbed } from '~/meshes/river'
 
 export default class Logic {
   scene: Scene
@@ -11,7 +11,7 @@ export default class Logic {
   constructor() {
     this.scene = new Scene
     this.camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight)
-    this.camera.position.set(-2, 2, 5)
+    this.camera.position.set(-2, 2, 2)
     
     this.renderer = new WebGLRenderer
     this.renderer.setSize(window.innerWidth, window.innerHeight)
