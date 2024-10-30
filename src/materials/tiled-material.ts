@@ -1,20 +1,17 @@
 import { ShaderMaterial, TextureLoader } from 'three'
-import vertexShader from '~/shaders/basicWithUVs.vert?raw'
-import fragmentShader from '~/shaders/texture.frag?raw'
+import vertexShader from '~/materials/shaders/basic.vert?raw'
+import fragmentShader from '~/materials/shaders/texture.frag?raw'
 
 interface TiledMaterialProps{
   texturePath: string
-  tiles?: number
 }
 
 const TiledMaterial = ({
-  texturePath,
-  tiles=1
+  texturePath
 }: TiledMaterialProps) => {
   const texture = new TextureLoader().load(texturePath)
   const uniforms = {
-    "u_texture": { value: texture },
-    "u_tiles": { value: tiles }
+    "u_texture": { value: texture }
   }
 
   const material = new ShaderMaterial({

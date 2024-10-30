@@ -1,3 +1,3 @@
-import Logic from '~/logic'
+import GameEngine from '~/game-engine'
 
-const logic = new Logic
+new GameEngine

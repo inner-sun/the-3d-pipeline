@@ -12,6 +12,17 @@ class: invert
 
 ---
 
+# Shader
+
+| Variables | Usage |
+| --- | --- |
+| `Uniforms` | Valeurs passées aux shaders (textures, etc.) |
+| `Attributes` | Valeurs reliées au vertex, généralement venant modèle 3D : position d'un vertex, vertex color, etc. |
+| `Varyings` | Variable calculée dans un Vertex Shader puis passée dans le Fragment Shader |
+
+
+---
+
 # Uniforms
 
 ```glsl
@@ -26,6 +37,13 @@ sampler2D texture
 # Exercice
 
 Faire cycler la couleur d'un quad au cours du temps.
+
+---
+
+# Cycler la couleur
+
+- Ajouter un `uniform` contenant le temps écoulé
+- Mettre à jour le temps chaque frame
 
 ---
 
