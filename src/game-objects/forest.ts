@@ -1,65 +1,38 @@
-import { BufferAttribute, BufferGeometry, Mesh, MeshBasicMaterial, PlaneGeometry } from 'three'
+import { Mesh, NearestFilter, PlaneGeometry, ShaderMaterial, TextureLoader } from 'three'
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
-import TiledMaterial from '~/materials/tiled-material'
-import GrassTexture from '~/assets/grass.jpg'
+import grassTextureA from '~/assets/grass-a.png'
+import grassTextureB from '~/assets/grass-b.png'
+import randomTileMap from '~/materials/maps/random'
+import vertexShader from '~/materials/shaders/basic.vert?raw'
+import fragmentShader from '~/materials/shaders/mixed-texture.frag?raw'
 
 export default class Forest extends GameObject{
   constructor(){
     super()
 
-    const divs = 10
-
-    const geometry = new BufferGeometry
-    const vertices: number[] = []
-    const uvs: number[] = []
-    const indices: number[] = []
-
-    for (let x = 0; x < divs; x++) {
-      for (let y = 0; y < divs; y++) {
-        // Define vertices for each cell quad (4 vertices per cell)
-        vertices.push(
-          x, y, 0,        // Bottom-left vertex
-          x + 1, y, 0,    // Bottom-right vertex
-          x, y + 1, 0,    // Top-left vertex
-          x + 1, y + 1, 0 // Top-right vertex
-        )
-
-        // Define UV coordinates for each vertex
-        uvs.push(
-          0, 0,   // Bottom-left UV
-          1, 0,   // Bottom-right UV
-          0, 1,   // Top-left UV
-          1, 1    // Top-right UV
-        )
-
-        // Define indices for the two triangles that make up the quad
-        const baseIndex = (x * divs + y) * 4; // Base index for this cell's vertices
-        indices.push(
-          baseIndex, baseIndex + 1, baseIndex + 2, // First triangle
-          baseIndex + 1, baseIndex + 3, baseIndex + 2 // Second triangle
-        )
-      }
-    }
-   
-    const positionAttribute = new Float32Array(vertices)
-    const uvAttribute = new Float32Array(uvs)
-    geometry.setAttribute('position', new BufferAttribute(positionAttribute, 3))
-    geometry.setAttribute('uv', new BufferAttribute(uvAttribute, 2))
-    geometry.setIndex(indices)
-
-    // Recenter
-    geometry.translate(-divs/2, -divs/2, 0)
-    // Flatten on horizon
+    const size = 16
+    const geometry = new PlaneGeometry(size, size, size * 2, size * 2)
     geometry.rotateX(-Math.PI / 2)
 
-    console.log(geometry)
-    // const material = new MeshBasicMaterial({
-    //   color: 0x00FF00,
-    //   wireframe: true
-    // })
-    const material = TiledMaterial({ texturePath: GrassTexture })
+    const textureA = new TextureLoader().load(grassTextureA)
+    const textureB = new TextureLoader().load(grassTextureB)
+    textureA.magFilter = textureA.minFilter = NearestFilter
+    textureB.magFilter = textureB.minFilter = NearestFilter
+    const tilemap = randomTileMap(16)
 
+    const uniforms = {
+      "u_texture_a": { value: textureA },
+      "u_texture_b": { value: textureB },
+      "u_texture_tile": { value: tilemap }
+    }
+
+    const material = new ShaderMaterial({
+      uniforms,
+      vertexShader,
+      fragmentShader
+    })
+    
     this.meshGroup = new Mesh(geometry, material)
   }
 
