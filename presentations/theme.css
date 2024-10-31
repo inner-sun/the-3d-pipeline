@@ -7,7 +7,6 @@ section.cover{
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* padding: 0 40vw; */
 }
 
 section.cover h1{
@@ -53,4 +52,14 @@ h4+h1{
 
 a{
   color: #8989ee;
+}
+
+ol li{
+  font-size: 4vh;
+  font-weight: normal;
+}
+
+ol li ol li{
+  font-size: 3.5vh;
+  color: var(--color-fg-muted);
 }
