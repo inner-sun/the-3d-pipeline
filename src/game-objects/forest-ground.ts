@@ -12,7 +12,7 @@ export default class ForestGround extends GameObject{
     super()
 
     const size = 16
-    const geometry = new PlaneGeometry(size, size, size * 2, size * 2)
+    const geometry = new PlaneGeometry(size, size)
     geometry.rotateX(-Math.PI / 2)
 
     const textureA = new TextureLoader().load(grassTextureA)

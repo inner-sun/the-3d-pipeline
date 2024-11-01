@@ -10,6 +10,6 @@
 		{"id":"378d3b270a74ea2e","type":"text","text":"tick(engine)","x":120,"y":-180,"width":250,"height":60}
 	],
 	"edges":[
-		{"id":"ffded080b0ab5833","fromNode":"15d257a2de950b75","fromSide":"right","toNode":"ef4f2b7536ecea40","toSide":"left","label":"Créé chaque instance de GameObject avec une référence au GameEngine"}
+		{"id":"ffded080b0ab5833","fromNode":"f95f1576d8d9d87d","fromSide":"right","toNode":"378d3b270a74ea2e","toSide":"left","label":"Créé chaque instance de GameObject avec une référence au GameEngine"}
 	]
 }
