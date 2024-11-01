@@ -5,13 +5,17 @@ import taigaTexture from '~/assets/taiga.png'
 import vertexShader from '~/materials/shaders/basic.vert?raw'
 import fragmentShader from '~/materials/shaders/texture.frag?raw'
 import Easing from '~/utilities/easing'
+import ForestTree from '~/game-objects/forest-tree'
 
-export default class ForestMountains extends GameObject{
+export default class ForestMountains extends GameObject{  
   constructor(){
     super()
 
+    const treeZone = 8
+    const treeSpread = 1
+
     const size = 32
-    const geometry = new PlaneGeometry(size, size, size * 2, size * 2)
+    const geometry = new PlaneGeometry(size, size, size, size)
     geometry.rotateX(-Math.PI / 2)
 
     // Apply Perlin noise on each vertex Y position
@@ -22,15 +26,25 @@ export default class ForestMountains extends GameObject{
     const center = new Vector3
     const cornerVertex = new Vector3().fromBufferAttribute(positionAttribute, 0)
     const maxDistance = cornerVertex.distanceTo(center)
+
     for(let i = 0; i < vertices.length; i++){
+      // Apply displacement
       const vertex = new Vector3().fromBufferAttribute(positionAttribute, i)
       const distanceFromEdge = vertex.distanceTo(center) / maxDistance
       const scale = Easing.easeInCubic(distanceFromEdge)
-      const outsidePlayAreaX = (vertex.x < -size * (1/4)) || (vertex.x > size * (1/4))
-      const outsidePlayAreaY = (vertex.z < -size * (1/4)) || (vertex.z > size * (1/4))
-      const outsidePlayArea = outsidePlayAreaX || outsidePlayAreaY
-      positionAttribute.setY(i, Math.random() * maxDisplacement * scale)
-      if(outsidePlayArea){
+      vertex.setY(Math.random() * maxDisplacement * scale)
+      positionAttribute.setY(i, vertex.y)
+
+      // Append a tree if we're on the edge of the central plain 
+      const inTreeZone = distanceFromEdge > 0.25 && distanceFromEdge < 0.66
+      const random = Math.random() > 0.75
+      if (inTreeZone && random){
+        const tree = new ForestTree
+        const jitter = Math.random()
+        tree.meshGroup.position.copy(vertex)
+        tree.meshGroup.translateX(jitter)
+        tree.meshGroup.translateZ(jitter)
+        this.meshGroup.add(tree.meshGroup)
       }
     }
     geometry.setAttribute('position', positionAttribute)
@@ -50,8 +64,8 @@ export default class ForestMountains extends GameObject{
     })
 
     const mountains = new Mesh(geometry, material)
-    mountains.translateY(-0.2)
     this.meshGroup.add(mountains)
+    this.meshGroup.translateY(-0.2)
   }
 
   tick(engine: GameEngine){

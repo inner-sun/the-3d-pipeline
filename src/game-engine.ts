@@ -16,7 +16,7 @@ export default class GameEngine {
     this.scene = new Scene
     this.scene.background = new Color(0x64b6f0)
     this.camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight)
-    this.camera.position.set(-5, 5, 10)
+    this.camera.position.set(-7, 4, 14)
     this.camera.lookAt(new Vector3(0, 0, 0))
     this.entities = []
     this.uniforms = globalUniforms
@@ -45,7 +45,10 @@ export default class GameEngine {
   }
 
   registerEventListeners() {
-    window.onresize = () => { this.setView() }
+    window.onresize = () => {
+      this.setView()
+      console.log(this.camera)
+}
   }
 
   tick() {
