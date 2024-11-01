@@ -37,13 +37,15 @@ export default class ForestMountains extends GameObject{
 
       // Append a tree if we're on the edge of the central plain 
       const inTreeZone = distanceFromEdge > 0.25 && distanceFromEdge < 0.66
-      const random = Math.random() > 0.75
+      const random = Math.random() > 0.5
       if (inTreeZone && random){
         const tree = new ForestTree
-        const jitter = Math.random()
+        const randomPosition = Math.random()
+        const randomScale = (0.5 + Math.random())/2
         tree.meshGroup.position.copy(vertex)
-        tree.meshGroup.translateX(jitter)
-        tree.meshGroup.translateZ(jitter)
+        tree.meshGroup.translateX(randomPosition)
+        tree.meshGroup.translateZ(randomPosition)
+        tree.meshGroup.scale.setScalar(randomScale)
         this.meshGroup.add(tree.meshGroup)
       }
     }

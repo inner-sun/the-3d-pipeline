@@ -9,7 +9,6 @@ export default class ForestTree extends GameObject{
 
     const loader = new GLTFLoader()
     loader.load(model, (mesh) => {
-      mesh.scene.scale.setScalar(0.5)
       this.meshGroup.add(mesh.scene)
     })
   }
