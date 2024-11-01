@@ -1,4 +1,4 @@
-import { Scene, PerspectiveCamera, WebGLRenderer, Vector3 } from 'three'
+import { Scene, PerspectiveCamera, WebGLRenderer, Vector3, Color } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import Forest from '~/game-objects/forest'
 import GameObject from '~/game-objects/game-object'
@@ -14,6 +14,7 @@ export default class GameEngine {
 
   constructor() {
     this.scene = new Scene
+    this.scene.background = new Color(0x64b6f0)
     this.camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight)
     this.camera.position.set(-5, 5, 10)
     this.camera.lookAt(new Vector3(0, 0, 0))
