@@ -45,10 +45,7 @@ export default class GameEngine {
   }
 
   registerEventListeners() {
-    window.onresize = () => {
-      this.setView()
-      console.log(this.camera)
-}
+    window.onresize = () => { this.setView() }
   }
 
   tick() {
