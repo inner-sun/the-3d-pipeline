@@ -27,7 +27,7 @@ export default class ForestMountains extends GameObject{
     const cornerVertex = new Vector3().fromBufferAttribute(positionAttribute, 0)
     const maxDistance = cornerVertex.distanceTo(center)
 
-    for(let i = 0; i < vertices.length; i++){
+    for(let i = 0; i < vertices.length / 3; i++){
       // Apply displacement
       const vertex = new Vector3().fromBufferAttribute(positionAttribute, i)
       const distanceFromEdge = vertex.distanceTo(center) / maxDistance
