@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import GameObject from '~/game-objects/game-object'
 import { globalUniforms } from '~/uniforms'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
-import GravityPuzzle from '~/game-objects/gravity-puzzle'
+import DebugObject from '~/game-objects/debug-object'
 
 export default class GameEngine {
   clock: Clock
@@ -21,7 +21,7 @@ export default class GameEngine {
     this.scene = new Scene
     this.scene.background = new Color(0x000000)
     this.camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight)
-    this.camera.position.set(0, 0, 20)
+    this.camera.position.set(2, 2, 2)
     this.camera.lookAt(new Vector3(0, 0, 0))
     this.entities = []
     this.uniforms = globalUniforms
@@ -33,7 +33,7 @@ export default class GameEngine {
     this.registerEventListeners()
     this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement)
 
-    this.addEntity(new GravityPuzzle)
+    this.addEntity(new DebugObject)
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)
