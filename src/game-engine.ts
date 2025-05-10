@@ -33,7 +33,7 @@ export default class GameEngine {
     this.registerEventListeners()
     this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement)
 
-    this.addEntity(new PhysicsPlayground)
+    this.addEntity(new PhysicsPlayground(this))
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)

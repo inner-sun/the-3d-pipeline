@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@dimforge/rapier3d-compat": "^0.16.2",
     "three": "^0.169.0",
     "three-custom-shader-material": "^6.3.6",
     "vite": "^5.4.8"
