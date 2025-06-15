@@ -24,7 +24,7 @@ export default class GameEngine {
     this.scene = new Scene
     this.scene.background = new Color(0x000000)
     this.camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight)
-    this.camera.position.set(0, 5, 10)
+    this.camera.position.set(0, 1.25, 15)
     this.entities = []
     this.uniforms = globalUniforms
     
@@ -34,9 +34,9 @@ export default class GameEngine {
     
     this.registerEventListeners()
     this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement)
-    this.orbitControls.target.set(0, 5, 0)
+    this.orbitControls.target.set(0, 2, 0)
 
-    // this.scene.background = new Color(0xffffff)
+    this.scene.background = new Color(0xffffff)
     this.addEntity(new Ascension)
 
     this.stats = new Stats()
