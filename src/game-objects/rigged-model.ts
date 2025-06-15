@@ -2,7 +2,7 @@ import { GLTFLoader } from 'three/examples/jsm/Addons.js'
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
 import model from '~/assets/character-rig.glb?url'
-import { AnimationMixer, MeshNormalMaterial } from 'three'
+import { AnimationMixer, Mesh, MeshNormalMaterial } from 'three'
 
 export default class RiggedModel extends GameObject{
   animationMixer?: AnimationMixer
@@ -14,8 +14,8 @@ export default class RiggedModel extends GameObject{
     loader.load(model, (mesh) => {
       // Load model and set debug material
       mesh.scene.traverse((child) => {
-        if (child.isMesh) {
-          child.material = new MeshNormalMaterial()
+        if (child.type === "Mesh") {
+          (child as Mesh).material = new MeshNormalMaterial()
         }
       })
       this.meshGroup.add(mesh.scene)
