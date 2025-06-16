@@ -29,13 +29,15 @@ export default class Clouds extends GameObject{
       return position
     })()
 
+    const randomOffset = Math.random()
+
     // TSL Fragment shader
     this.material.colorNode = Fn(() => {
       const mirroredGradient = uv().x.mul(2).sub(1).abs()
 
       // UV used to sample the texture with a mirrored effect
       let scaledUV = vec2(mirroredGradient.x, uv().y).mul(vec2(1280/768, 2))
-      scaledUV.x = scaledUV.x.sub(this.time.mul(0.1))
+      scaledUV.x = scaledUV.x.sub(this.time.mul(0.1)).add(randomOffset)
 
       const cloudsTexture = texture(textureMap, scaledUV)
       const white = vec4(1, 1, 1, cloudsTexture.a)

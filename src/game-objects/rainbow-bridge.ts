@@ -11,7 +11,7 @@ export default class RainbowBridge extends GameObject{
     super()
 
     const width = 2
-    const height = 10
+    const height = 16
     const plane = new PlaneGeometry(width, height)
     plane.translate(0, height/2, 0)
     this.material = new MeshBasicNodeMaterial

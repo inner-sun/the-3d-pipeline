@@ -1,33 +1,44 @@
-import { Mesh, MeshBasicMaterial, PlaneGeometry } from 'three'
 import GameEngine from '~/game-engine'
 import Clouds from '~/game-objects/clouds'
 import GameObject from '~/game-objects/game-object'
+import MysticPuddle from '~/game-objects/mystic-puddle'
 import RainbowBridge from '~/game-objects/rainbow-bridge'
 
 export default class Ascension extends GameObject{
-  rainbowBridge = new RainbowBridge
-  clouds = new Clouds
+  gameObjects: GameObject[] = []
 
   constructor(){
     super()
 
+    // Ascending particles
+    const ascendingParticles = new RainbowBridge
+    ascendingParticles.meshGroup.position.set(0, 0, -51)
+    ascendingParticles.meshGroup.scale.set(48, 10, 1)
+
     // Rainbow Bridge
-    this.rainbowBridge.meshGroup.position.set(0, 0, 0)
-    this.meshGroup.add(this.rainbowBridge.meshGroup)
+    const rainbowBridge = new RainbowBridge
+    rainbowBridge.meshGroup.position.set(0, 0, 0)
 
     // Clouds
-    this.clouds.meshGroup.position.set(0, 0, -0.5)
-    this.meshGroup.add(this.clouds.meshGroup)
+    const cloudsFront = new Clouds
+    cloudsFront.meshGroup.position.set(0, 0, -0.5)
 
-    // debug geometry
-    const groundGeometry = new PlaneGeometry(10, 10, 10, 10)
-    groundGeometry.rotateX(-Math.PI / 2)
-    const ground = new Mesh(groundGeometry, new MeshBasicMaterial({ wireframe: true }))
-    this.meshGroup.add(ground)
+    const cloudsMiddle = new Clouds
+    cloudsMiddle.meshGroup.position.set(0, 0, -10)
+    cloudsMiddle.meshGroup.scale.setScalar(3)
+
+    const cloudsBack = new Clouds
+    cloudsBack.meshGroup.position.set(0, 0, -50)
+    cloudsBack.meshGroup.scale.setScalar(10)
+
+    // Mystic Puddle
+    const mysticPuddle = new MysticPuddle
+
+    this.gameObjects.push(ascendingParticles, rainbowBridge, cloudsFront, cloudsMiddle, cloudsBack, mysticPuddle)
+    this.gameObjects.forEach(gameObject => this.meshGroup.add(gameObject.meshGroup))
   }
 
   tick(engine: GameEngine){
-    this.rainbowBridge.tick(engine)
-    this.clouds.tick(engine)
+    this.gameObjects.forEach(gameObject => gameObject.tick(engine))
   }
 }
