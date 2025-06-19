@@ -7,6 +7,7 @@ import { WebGPURenderer } from 'three/webgpu'
 import TSLDisplacedCube from '~/game-objects/tsl-displaced-cube'
 import Ascension from '~/game-objects/ascension'
 import RiggedModel from '~/game-objects/rigged-model'
+import RadialUV from '~/game-objects/radial-uv'
 
 export default class GameEngine {
   clock: Clock
@@ -24,7 +25,7 @@ export default class GameEngine {
     this.scene = new Scene
     this.scene.background = new Color(0x000000)
     this.camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight)
-    this.camera.position.set(0, 1, 15)
+    this.camera.position.set(0, 0, 2)
     this.entities = []
     this.uniforms = globalUniforms
     
@@ -34,14 +35,10 @@ export default class GameEngine {
     
     this.registerEventListeners()
     this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement)
-    this.orbitControls.target.set(0, 4, 0)
+    // this.orbitControls.target.set(0, 4, 0)
 
-    // debug cam
-    // this.camera.position.set(0, 10, 15)
-    // this.orbitControls.target.set(0, 0, 0)
-
-    this.scene.background = new Color(0xffffff)
-    this.addEntity(new Ascension)
+    // this.scene.background = new Color(0xffffff)
+    this.addEntity(new RadialUV)
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)
