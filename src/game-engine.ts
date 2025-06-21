@@ -1,13 +1,10 @@
-import { Scene, PerspectiveCamera, Vector3, Color, Clock } from 'three'
+import { Scene, PerspectiveCamera, Color, Clock } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import GameObject from '~/game-objects/game-object'
 import { globalUniforms } from '~/uniforms'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { WebGPURenderer } from 'three/webgpu'
-import TSLDisplacedCube from '~/game-objects/tsl-displaced-cube'
-import Ascension from '~/game-objects/ascension'
-import RiggedModel from '~/game-objects/rigged-model'
-import RadialUV from '~/game-objects/radial-uv'
+import PortalScene from '~/game-objects/portal-scene'
 
 export default class GameEngine {
   clock: Clock
@@ -29,16 +26,16 @@ export default class GameEngine {
     this.entities = []
     this.uniforms = globalUniforms
     
-    this.renderer = new WebGPURenderer
+    this.renderer = new WebGPURenderer({
+      stencil: true
+    })
     document.body.appendChild(this.renderer.domElement)
     this.setView()
     
     this.registerEventListeners()
     this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement)
-    // this.orbitControls.target.set(0, 4, 0)
 
-    // this.scene.background = new Color(0xffffff)
-    this.addEntity(new RadialUV)
+    this.addEntity(new PortalScene)
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)

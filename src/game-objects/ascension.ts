@@ -3,12 +3,15 @@ import Clouds from '~/game-objects/clouds'
 import GameObject from '~/game-objects/game-object'
 import MysticPuddle from '~/game-objects/mystic-puddle'
 import RainbowBridge from '~/game-objects/rainbow-bridge'
+import Skybox from '~/game-objects/skybox'
 
 export default class Ascension extends GameObject{
   gameObjects: GameObject[] = []
 
   constructor(){
     super()
+
+    const skybox = new Skybox
 
     // Ascending particles
     const ascendingParticles = new RainbowBridge
@@ -34,7 +37,7 @@ export default class Ascension extends GameObject{
     // Mystic Puddle
     const mysticPuddle = new MysticPuddle
 
-    this.gameObjects.push(ascendingParticles, rainbowBridge, cloudsFront, cloudsMiddle, cloudsBack, mysticPuddle)
+    this.gameObjects.push(skybox, ascendingParticles, rainbowBridge, cloudsFront, cloudsMiddle, cloudsBack, mysticPuddle)
     this.gameObjects.forEach(gameObject => this.meshGroup.add(gameObject.meshGroup))
   }
 
