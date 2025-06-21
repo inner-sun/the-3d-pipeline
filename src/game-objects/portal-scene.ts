@@ -2,7 +2,6 @@ import GameEngine from '~/game-engine'
 import Ascension from '~/game-objects/ascension'
 import GameObject from '~/game-objects/game-object'
 import Portal from '~/game-objects/portal'
-import Scenery from '~/game-objects/scenery'
 import { useStencilMask } from '~/utilities/stencil'
 
 export default class PortalScene extends GameObject{
